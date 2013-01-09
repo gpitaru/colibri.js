@@ -11,13 +11,13 @@
 
 (function($) {
 
-    $.colibri = (function(msg, clss) {
+    $.colibri = (function(msg, clss, sticky) {
 
-        var $container = $('#colibri-container');
+        var $container = $('#colibri-container' + (sticky ? '-sticky' : ''));
 
         if (!$container.length) {
 
-            var $container = $('<div/>').attr('id', 'colibri-container');
+            var $container = $('<div/>').attr('id', 'colibri-container' + (sticky ? '-sticky' : ''));
 
             $container.appendTo($('body'));
 
@@ -55,7 +55,8 @@
 
         };
 
-        setTimeout(fadeAway, 5000);
+        if (!sticky)
+            setTimeout(fadeAway, 3000);
 
         return $element;
 
@@ -63,6 +64,6 @@
 
 })(jQuery);
 
-function colibri(msg, clss) {
-    $.colibri(msg, clss);
+function colibri(msg, clss, sticky) {
+    return $.colibri(msg, clss, sticky);
 }
